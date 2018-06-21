@@ -78,18 +78,3 @@ class LinkedList {
   }
 }
 
-function insertFirst() {
-
-}
-
-function insertLast() {
-
-}
-
-function find() {
-
-}
-
-function remove() {
-  
-}
