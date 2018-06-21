@@ -137,43 +137,6 @@ class LinkedList {
   }
 }
 
-function main() {
-  let SLL = new LinkedList();
-  SLL.insertFirst('Apollo');
-  SLL.insertLast('Boomer');
-  SLL.insertLast('Helo');
-  SLL.insertLast('Husker');
-  SLL.insertLast('Starbuck');
-  SLL.insertLast('Tauhida');
-  SLL.remove('squirrel');
-  SLL.insertBefore('Athena', 'Boomer');
-  SLL.insertAfter('Hotdog', 'Helo');
-  SLL.insertAt('Kat', 3);
-  SLL.remove('Tauhida');
-  SLL.insertLast('Boomer');
-
-  console.log(
-    JSON.stringify(
-      SLL
-      , null, 2)
-  );
-  // console.log(displaySize(SLL));
-  // console.log(isEmpty(SLL));
-  // console.log(findPrevious(SLL,'Starbuck'));
-  // console.log(findLast(SLL));
-  // WhatDoesThisProgramDo(SLL);
-  // console.log(
-  //   JSON.stringify(
-  //     SLL
-  //   ,null,2)
-  // );
-  reverse(SLL);
-  display(SLL);
-
-
-}
-main();
-
 function display(sll) {
   let current = sll.head;
   while (current) {
@@ -267,3 +230,76 @@ function reverse(list) {
   list.head = previous;
   return list;
 }
+
+function thirdFromTheEnd(sll){
+  let length = displaySize(sll);
+  console.log("length in thirdfromend: ",length);
+  
+  let current = sll.head;
+  let count = 0;
+  while(count !== length - 3){
+    count++;
+    current = current.next;
+  }
+  return current;
+}
+
+//
+function middleOfAList(sll){
+  let current = sll.head;
+  let slow = current;
+  let fast = current.next;
+  while(fast !== null && fast.next !== null){    
+    slow = slow.next;
+    fast = fast.next.next;
+  }
+  return slow.value
+}
+//1st round
+//
+//
+//
+
+// function cycleInAList(sll){
+
+// }
+
+
+function main() {
+  let SLL = new LinkedList();
+  SLL.insertFirst('Apollo');
+  SLL.insertLast('Boomer');
+  SLL.insertLast('Helo');
+  SLL.insertLast('Husker');
+  SLL.insertLast('Starbuck');
+  SLL.insertLast('Tauhida');
+  SLL.remove('squirrel');
+  SLL.insertBefore('Athena', 'Boomer');
+  SLL.insertAfter('Hotdog', 'Helo');
+  SLL.insertAt('Kat', 3);
+  SLL.remove('Tauhida');
+  SLL.insertLast('Boomer');
+
+  console.log(
+    JSON.stringify(
+      SLL
+      , null, 2)
+  );
+  // console.log(displaySize(SLL));
+  // console.log(isEmpty(SLL));
+  // console.log(findPrevious(SLL,'Starbuck'));
+  // console.log(findLast(SLL));
+  // WhatDoesThisProgramDo(SLL);
+  // console.log(
+  //   JSON.stringify(
+  //     SLL
+  //   ,null,2)
+  // );
+  // reverse(SLL);
+  console.log(middleOfAList(SLL));
+  display(SLL);
+
+
+
+}
+main();
