@@ -76,21 +76,21 @@ class LinkedList {
     }
     previousNode.next = currNode.next;
   }
-            // athena , boomer
-  insertBefore(item, nodeValue ){
+  // athena , boomer
+  insertBefore(item, nodeValue) {
     let previous = this.head;
     let current = this.head;
-    if(this.head === nodeValue || !this.head){
+    if (this.head === nodeValue || !this.head) {
       this.insertFirst(item)
     }
 
-    while(current !== null && current.value !== nodeValue){
+    while (current !== null && current.value !== nodeValue) {
       previous = current;
       current = current.next;
     }
-    if(current === null){
+    if (current === null) {
       console.log('Item not found');
-      return;      
+      return;
     }
     previous.next = new _Node(item, current)
   }
@@ -101,7 +101,7 @@ class LinkedList {
     }
 
     let current = this.head;
-    while(current !== null && current.value !== value) {
+    while (current !== null && current.value !== value) {
       current = current.next;
     }
     if (current === null) {
@@ -137,80 +137,133 @@ class LinkedList {
   }
 }
 
-function main(){
+function main() {
   let SLL = new LinkedList();
-  // SLL.insertFirst('Apollo');
-  // SLL.insertLast('Boomer');
-  // SLL.insertLast('Helo');
-  // SLL.insertLast('Husker');
-  // SLL.insertLast('Starbuck');
-  // SLL.insertLast('Tauhida');
-  // SLL.remove('squirrel');
-  // SLL.insertBefore('Athena', 'Boomer');
-  // SLL.insertAfter('Hotdog', 'Helo');
-  // SLL.insertAt('Kat', 3);
-  // SLL.remove('Tauhida');
+  SLL.insertFirst('Apollo');
+  SLL.insertLast('Boomer');
+  SLL.insertLast('Helo');
+  SLL.insertLast('Husker');
+  SLL.insertLast('Starbuck');
+  SLL.insertLast('Tauhida');
+  SLL.remove('squirrel');
+  SLL.insertBefore('Athena', 'Boomer');
+  SLL.insertAfter('Hotdog', 'Helo');
+  SLL.insertAt('Kat', 3);
+  SLL.remove('Tauhida');
+  SLL.insertLast('Boomer');
 
+  console.log(
+    JSON.stringify(
+      SLL
+      , null, 2)
+  );
+  // console.log(displaySize(SLL));
+  // console.log(isEmpty(SLL));
+  // console.log(findPrevious(SLL,'Starbuck'));
+  // console.log(findLast(SLL));
+  // WhatDoesThisProgramDo(SLL);
   // console.log(
   //   JSON.stringify(
   //     SLL
   //   ,null,2)
   // );
-  // console.log(displaySize(SLL));
-  // console.log(isEmpty(SLL));
-  // console.log(findPrevious(SLL,'Starbuck'));
-  console.log(findLast(SLL));
-  
-  
+  reverse(SLL);
+  display(SLL);
+
+
 }
 main();
 
-function display(sll){
+function display(sll) {
   let current = sll.head;
-  while(current){
+  while (current) {
     console.log(current.value);
     current = current.next;
   }
 };
 
-function displaySize(sll){
+function displaySize(sll) {
   let count = 0;
   let current = sll.head;
-  while(current){
+  while (current) {
     count++;
     current = current.next;
   }
   return count;
 }
 
-function isEmpty(sll){
+function isEmpty(sll) {
   return !sll.head;
 }
 
-function findPrevious(sll, item){
+function findPrevious(sll, item) {
   let previous = sll.head;
   let current = sll.head;
-  while(current !== null && current.value !== item){
+  while (current !== null && current.value !== item) {
     previous = current;
     current = current.next;
   }
-  if(current === null){
+  if (current === null) {
     console.log('Item does not exist');
-    return;    
+    return;
   }
   return previous;
 }
 
-function findLast(sll){
+function findLast(sll) {
   let current = sll.head;
-  if(!sll.head){
+  if (!sll.head) {
     return sll.head;
   }
-  while(current.next !== null){
-    current = current.next
+  while (current.next !== null) {
+    current = current.next;
   }
   return current;
 }
 
+// MYSTERY PROGRAM
 
+// | | | | | |
+//  1 2 2 4 6
 
+//value 4, next: { value: 1, next: {value: 6}
+
+// current = lst.head = 1
+// newNode = current = 1
+// newNode = 2
+function WhatDoesThisProgramDo(lst) {
+  let current = lst.head;
+  while (current !== null) {
+    let newNode = current;
+    while (newNode.next !== null) {
+      if (newNode.next.value === current.value) {
+        newNode.next = newNode.next.next;
+      }
+      else {
+        newNode = newNode.next;
+      }
+    }
+    current = current.next;
+  }
+}
+// O(n^2)
+// This function removes duplicates from a linked list
+
+// REVERSE A LIST
+function reverse(list) {
+  // A -> B -> C -> D -> null => D -> C -> B -> A -> null
+  // current = list.head
+  // previous = list.head
+  // current = current.next -> previous.next = previous
+  let previous = null;
+  let current = list.head;
+  let next = null;
+  while (current !== null) {
+    next = current.next; // B --- C
+    current.next = previous; // A -> null --- B -> A
+    previous = current; // A --- B
+    current = next; // B --- C
+  }
+  list.head = previous;
+  return list;
+}
