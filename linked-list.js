@@ -80,8 +80,8 @@ class LinkedList {
   insertBefore(item, nodeValue ){
     let previous = this.head;
     let current = this.head;
-    if(this.head === nodeValue){
-      this.head = new _Node(item, this.head);
+    if(this.head === nodeValue || !this.head){
+      this.insertFirst(item)
     }
 
     while(current !== null && current.value !== nodeValue){
@@ -94,7 +94,50 @@ class LinkedList {
     }
     previous.next = new _Node(item, current)
   }
+
+  insertAfter(item, value) {
+    if (!this.head) {
+      this.insertFirst(item);
+    }
+
+    let current = this.head;
+    while(current !== null && current.value !== value) {
+      current = current.next;
+    }
+    if (current === null) {
+      console.log('Item not found');
+      return;
+    }
+    current.next = new _Node(item, current.next)
+  }
+
+  insertAt(item, num) {
+    if (!this.head || num <= 1) {
+      this.insertFirst(item);
+      return;
+    }
+
+    let count = 1;
+    let previous = this.head;
+    let current = this.head;
+
+    while (current !== null && count !== num) {
+      count += 1;
+      previous = current;
+      current = current.next;
+    }
+
+    if (current === null) {
+      previous.next = new _Node(item, current)
+      return;
+    }
+
+    previous.next = new _Node(item, current)
+
+  }
 }
+
+
 
 
 function main(){
@@ -107,6 +150,9 @@ function main(){
   SSL.insertLast('Tauhida');
   SSL.remove('squirrel');
   SSL.insertBefore('Athena', 'Boomer');
+  SSL.insertAfter('Hotdog', 'Helo');
+  SSL.insertAt('Kat', 3);
+  SSL.remove('Tauhida');
 
   console.log(
     JSON.stringify(
