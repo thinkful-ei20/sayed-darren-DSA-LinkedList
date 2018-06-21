@@ -137,35 +137,80 @@ class LinkedList {
   }
 }
 
-
-
-
 function main(){
-  let SSL = new LinkedList();
-  SSL.insertFirst('Apollo');
-  SSL.insertLast('Boomer');
-  SSL.insertLast('Helo');
-  SSL.insertLast('Husker');
-  SSL.insertLast('Starbuck');
-  SSL.insertLast('Tauhida');
-  SSL.remove('squirrel');
-  SSL.insertBefore('Athena', 'Boomer');
-  SSL.insertAfter('Hotdog', 'Helo');
-  SSL.insertAt('Kat', 3);
-  SSL.remove('Tauhida');
+  let SLL = new LinkedList();
+  // SLL.insertFirst('Apollo');
+  // SLL.insertLast('Boomer');
+  // SLL.insertLast('Helo');
+  // SLL.insertLast('Husker');
+  // SLL.insertLast('Starbuck');
+  // SLL.insertLast('Tauhida');
+  // SLL.remove('squirrel');
+  // SLL.insertBefore('Athena', 'Boomer');
+  // SLL.insertAfter('Hotdog', 'Helo');
+  // SLL.insertAt('Kat', 3);
+  // SLL.remove('Tauhida');
 
-  console.log(
-    JSON.stringify(
-      SSL
-    ,null,2)
-  );
-
+  // console.log(
+  //   JSON.stringify(
+  //     SLL
+  //   ,null,2)
+  // );
+  // console.log(displaySize(SLL));
+  // console.log(isEmpty(SLL));
+  // console.log(findPrevious(SLL,'Starbuck'));
+  console.log(findLast(SLL));
+  
+  
 }
 main();
 
+function display(sll){
+  let current = sll.head;
+  while(current){
+    console.log(current.value);
+    current = current.next;
+  }
+};
 
+function displaySize(sll){
+  let count = 0;
+  let current = sll.head;
+  while(current){
+    count++;
+    current = current.next;
+  }
+  return count;
+}
 
+function isEmpty(sll){
+  return !sll.head;
+}
 
+function findPrevious(sll, item){
+  let previous = sll.head;
+  let current = sll.head;
+  while(current !== null && current.value !== item){
+    previous = current;
+    current = current.next;
+  }
+  if(current === null){
+    console.log('Item does not exist');
+    return;    
+  }
+  return previous;
+}
+
+function findLast(sll){
+  let current = sll.head;
+  if(!sll.head){
+    return sll.head;
+  }
+  while(current.next !== null){
+    current = current.next
+  }
+  return current;
+}
 
 
 
