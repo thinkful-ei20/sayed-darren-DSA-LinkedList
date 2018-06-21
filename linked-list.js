@@ -135,6 +135,17 @@ class LinkedList {
     previous.next = new _Node(item, current)
 
   }
+
+  insertCylce(item, value) {
+    let previous = this.head;
+    let current = this.head;
+
+    while (current.value !== value) {
+      previous = current;
+      current = current.next;
+    }
+    previous.next = new _Node(item, previous);
+  }
 }
 
 function display(sll) {
@@ -253,17 +264,32 @@ function middleOfAList(sll){
     slow = slow.next;
     fast = fast.next.next;
   }
-  return slow.value
+  return slow.value;
 }
-//1st round
-//
-//
+// A -> B -> C -> D -> E -> F -> G
+// slow = A -> B -> C -> D
+// fast = B -> D -> F -> null
 //
 
-// function cycleInAList(sll){
+// CYCLE IN A LIST
+// A -> B -> C -> D: D points to the B in the same list
+function cycleInAList(sll){
+  let previous = sll.head;
+  let current = sll.head;
+  while (previous.next !== current && current.next)
+}
 
-// }
-
+function create() {
+  let cycleList = new LinkedList();
+  cycleList.insertFirst('Apollo');
+  cycleList.insertLast('Boomer');
+  cycleList.insertLast('Helo');
+  cycleList.insertLast('Husker');
+  cycleList.insertCylce('apple', 'Helo')
+  console.log(cycleList);
+  // display(cycleList);
+}
+create();
 
 function main() {
   let SLL = new LinkedList();
