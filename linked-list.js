@@ -76,5 +76,50 @@ class LinkedList {
     }
     previousNode.next = currNode.next;
   }
+            // athena , boomer
+  insertBefore(item, nodeValue ){
+    let previous = this.head;
+    let current = this.head;
+    if(this.head === nodeValue){
+      this.head = new _Node(item, this.head);
+    }
+
+    while(current !== null && current.value !== nodeValue){
+      previous = current;
+      current = current.next;
+    }
+    if(current === null){
+      console.log('Item not found');
+      return;      
+    }
+    previous.next = new _Node(item, current)
+  }
 }
+
+
+function main(){
+  let SSL = new LinkedList();
+  SSL.insertFirst('Apollo');
+  SSL.insertLast('Boomer');
+  SSL.insertLast('Helo');
+  SSL.insertLast('Husker');
+  SSL.insertLast('Starbuck');
+  SSL.insertLast('Tauhida');
+  SSL.remove('squirrel');
+  SSL.insertBefore('Athena', 'Boomer');
+
+  console.log(
+    JSON.stringify(
+      SSL
+    ,null,2)
+  );
+
+}
+main();
+
+
+
+
+
+
 
